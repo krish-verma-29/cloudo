@@ -101,3 +101,38 @@ Geolocator → lat,lng → WeatherService (http GET) → JSON → WeatherModel �
 ## 8. Open Questions
 - Does the free plan give a 7-day forecast? If not, which alternative do we use?
 - Final monthly call limit on the free plan (verify on the official pricing page).
+
+## 9. Sample Response (current.json)
+
+```json
+{
+  "location": {
+    "name": "Indore",
+    "region": "Madhya Pradesh",
+    "country": "India",
+    "localtime": "2026-09-28 14:30"
+  },
+  "current": {
+    "last_updated": "2026-09-28 14:15",
+    "temp_c": 30.2,
+    "feelslike_c": 33.1,
+    "condition": {
+      "text": "Partly cloudy",
+      "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png"
+    },
+    "wind_kph": 12.6,
+    "humidity": 58
+  }
+}
+```
+(Values are examples. Real values change.)
+
+## 10. How Ajay Uses It
+
+```dart
+final weather = await WeatherService().getCurrentWeather(lat, lon);
+// weather.city, weather.tempC, weather.condition,
+// weather.humidity, weather.windKph, weather.iconUrl
+```
+
+Errors come as `WeatherException`. Show `e.message` on the error screen.
